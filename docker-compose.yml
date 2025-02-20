@@ -6,6 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: Thaitinh2004!
       MYSQL_DATABASE: crawled_data
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Thaitinh2004!
     ports:
       - "3306:3306"
     healthcheck:
@@ -16,8 +18,15 @@ services:
 
   scrapy:
     build: .
+    command: scrapy crawl site1_crawler -o output1.csv
     volumes:
       - .:/app
     depends_on:
       mysql:
         condition: service_healthy
+    working_dir: /app/myproject
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Thaitinh2004!
+      - MYSQL_DATABASE=crawled_data

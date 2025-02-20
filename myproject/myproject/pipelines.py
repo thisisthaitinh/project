@@ -7,6 +7,7 @@
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
 import pymysql
+import os
 
 
 
@@ -17,10 +18,11 @@ class MyprojectPipeline:
 class MySQLPipeline:
     def open_spider(self, spider):
         self.connection = pymysql.connect(
-            host='localhost',
-            user='root',
-            password='Thaitinh2004!',
-            db='crawled_data'
+            host=os.getenv('MYSQL_HOST', 'localhost'),
+            user=os.getenv('MYSQL_USER', 'root'),
+            password=os.getenv('MYSQL_PASSWORD', 'Thaitinh2004!'),
+            db=os.getenv('MYSQL_DATABASE', 'crawled_data'),
+            cursorclass=pymysql.cursors.DictCursor
         )
 
         self.cursor = self.connection.cursor()
