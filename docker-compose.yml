@@ -18,7 +18,7 @@ services:
 
   scrapy:
     build: .
-    command: scrapy crawl site1_crawler -o output1.csv
+    command: scrapy crawl site2_crawler -o output2.csv
     volumes:
       - .:/app
     depends_on:
