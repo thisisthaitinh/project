@@ -4,8 +4,8 @@ WORKDIR /app/myproject
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["scrapy", "crawl", "site2_crawler", "-o", "output2.csv"]
+CMD ["scrapy", "crawl", "site1_crawler", "-o", "output1.csv"]

@@ -25,7 +25,9 @@ class Site4Crawler(scrapy.Spider):
         salariesAmount = [s.text.strip().replace("Lương: ", "").strip() for s in salaries]
 
         # locations
-        locations = [l.text.strip() for l in container.find_all('div', class_='location')]
+        locationDiv = container.find('div', class_='location')
+        locationsLi = [l.get_text(strip=True) for l in locationDiv.find_all('li')]
+        locations = ', '.join(locationsLi)
 
         # links
         links = [link['href'] for link in container.find_all('a', class_='job_link')]

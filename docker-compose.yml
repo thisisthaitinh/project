@@ -6,7 +6,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: Thaitinh2004!
       MYSQL_DATABASE: crawled_data
-      MYSQL_USER: root
       MYSQL_PASSWORD: Thaitinh2004!
     ports:
       - "3306:3306"
@@ -18,7 +17,7 @@ services:
 
   scrapy:
     build: .
-    command: scrapy crawl site2_crawler -o output2.csv
+    command: scrapy crawl site1_crawler -o output1.csv
     volumes:
       - .:/app
     depends_on:
