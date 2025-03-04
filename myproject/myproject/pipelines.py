@@ -30,13 +30,11 @@ class MySQLPipeline:
         if spider.name == 'site1_crawler':
             self.cursor.execute('''
                 CREATE TABLE IF NOT EXISTS CHAMPIONS_LEAGUE_RESULTS (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                NGAY_THI_DAU VARCHAR(255),  
+                ID INT AUTO_INCREMENT PRIMARY KEY,
                 TRANG_THAI VARCHAR(255),
                 DOI_NHA VARCHAR(255),
                 TI_SO VARCHAR(255),
-                DOI_KHACH VARCHAR(255),
-                LINK_BAI_VIET VARCHAR(255)
+                DOI_KHACH VARCHAR(255)
             )
         ''')
         elif spider.name == 'site2_crawler':
@@ -78,8 +76,8 @@ class MySQLPipeline:
     def process_item(self, item, spider):
         if spider.name == 'site1_crawler':
             self.cursor.execute(
-                "INSERT INTO CHAMPIONS_LEAGUE_RESULTS (NGAY_THI_DAU, TRANG_THAI, DOI_NHA, TI_SO, DOI_KHACH, LINK_BAI_VIET) VALUES (%s, %s, %s, %s, %s, %s)",
-                (item['ngay_thi_dau'], item['trang_thai'], item['doi_nha'], item['ti_so'], item['doi_khach'], item['url'])
+                "INSERT INTO CHAMPIONS_LEAGUE_RESULTS (TRANG_THAI, DOI_NHA, TI_SO, DOI_KHACH) VALUES (%s, %s, %s, %s)",
+                (item['thoi_gian'], item['doi_nha'], item['ti_so'], item['doi_khach'])
             )
         elif spider.name == 'site2_crawler':
             self.cursor.execute(
